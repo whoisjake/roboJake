@@ -1,0 +1,45 @@
+#!/usr/bin/ruby
+
+require 'rubygems'
+require 'ruby-osc'
+require 'roomba'
+
+include  OSC
+
+server = Server.new 9090, "0.0.0.0"
+
+roomba = Roomba.new
+
+server.add_pattern "/bot/stop" do |*args|
+  roomba.stop
+end
+
+server.add_pattern "/bot/forward" do |*args|
+  roomba.forward([0,500])
+end
+
+server.add_pattern "/bot/backwards" do |*args|
+  roomba.backwards([0])
+end
+
+server.add_pattern "/bot/turn/left" do |*args|
+  roomba.turn_left(0)
+end
+
+server.add_pattern "/bot/turn/right" do |*args|
+  roomba.turn_right(0)
+end
+
+server.add_pattern "/bot/turn/around" do |*args|
+  roomba.turn_around
+end
+
+server.add_pattern "/bot/honk" do |*args|
+  roomba.beep
+end
+
+server.add_pattern "/exit" do |*args|    # this will just match /exit address
+  exit
+end
+
+OSC::Thread.join

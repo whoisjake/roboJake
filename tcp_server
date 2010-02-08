@@ -1,0 +1,31 @@
+#!/usr/bin/ruby
+
+require 'rubygems'
+require 'eventmachine'
+require 'roomba'
+require 'ip'
+
+class RoombaCommandReceiver < EventMachine::Connection
+  attr_accessor :roomba
+  
+  def initialize
+    self.roomba = Roomba.new
+  end
+  
+  def post_init
+    send_data "Welcome to roboJake 1.0\n"
+    send_data "-----------------------\n"
+    send_data "\n"
+    send_data "roboJake: \"I can show you the world... Shining, shimmering, splendid..\"\n\n"
+  end
+  
+  def receive_data(data)
+    self.roomba.execute(data)
+  end
+end
+
+EventMachine::run {
+  EventMachine::start_server "0.0.0.0", 6060, RoombaCommandReceiver
+  host, ip = IP::gather_info
+  puts "booting up roomba tcp server on #{host} (#{ip})"
+}

@@ -1,0 +1,52 @@
+=== Welcome to roboJake ===
+
+A simple roomba and netbook based robot, as a simple hardware
+base to a telepresence solution.
+
+hardware:
+netbook with wifi, usb port, webcam
+iRobot Create package
+iRobot USB <-> Serial Cable
+
+software:
+Ruby 1.8.7 (gems: ruby-osc, eventmachine, serialport)
+Virtual Serial Port (USB) Driver
+Mostly works out of box
+Skype
+Optional: iOSC or another OSC controller
+
+Through TCP interface
+
+Connect to your roomba via telnet:
+telnet <Roomba Netbook IP> 6060
+
+The following commands are available:
+forward <seconds>
+fast_forward <seconds>
+backwards <seconds>
+turn_left
+nudge_left
+turn_right
+nudge_right
+turn_around
+beep
+honk
+stop
+
+Through OSC interface
+
+This works with any standard, configurable OSC interface!
+
+Such as: iOSC (iPhone)
+
+Map the following urls to buttons, requires no arguments:
+"/bot/stop"
+"/bot/forward"
+"/bot/backwards"
+"/bot/turn/left"
+"/bot/turn/right"
+"/bot/turn/around"
+"/bot/honk"
+
+Each one should work on the button "down" event, with the "/bot/stop"
+being wired to the button "up" event to stop movement.
