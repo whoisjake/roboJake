@@ -16,7 +16,7 @@ class RoombaCommandReceiver < EventMachine::Connection
     send_data "Welcome to roboJake 1.0\n"
     send_data "-----------------------\n"
     send_data "\n"
-    send_data "roboJake: \"I can show you the world... Shining, shimmering, splendid..\"\n\n"
+    send_data "roboJake: \"Bow down to your vacuum overlords...\""
   end
   
   def receive_data(data)
